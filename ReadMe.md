@@ -84,8 +84,10 @@ To create the gif by yourself, simply run
 ```
 python scripts/run_goal_conditioned_policy.py --dir {dir-to-env-params.pkl} --gpu
 ```   
-A gif visual `visual.gif` should be soon dumped at the same directory as the params.pkl file. E.g. a visual for the trained model on hurdle-bottom push env is as below:  
-![Gif](hurdle-bottom-visual.gif)   
+A gif visual `visual.gif` should be soon dumped at the same directory as the params.pkl file.   
+E.g., visuals for the trained model on hurdle-bottom and hurdle-top push env are as below:  
+![Gif](hurdle-bottom-visual.gif)    ![Gif](hurdle-top-visual.gif)   
+Left: hurdlt-bottom puck pushing; Right: hurdle-top puck pushing.    
 In the gif:    
 - The 1st row is the segmented goal image  
 - The 2nd row is the image observation of the trained policy's execution  

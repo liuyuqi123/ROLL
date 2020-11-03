@@ -47,9 +47,8 @@ def main(trainDir, valDir, modelDir):
             mask_true = mask_true.cuda().float()
             mask_pred = model(image.float())
 
-            temp_mask_pred = mask_pred.detach().cpu().numpy().squeeze()
             loss = criterion(mask_pred, mask_true)
-            epochTrainLoss += loss
+            epochTrainLoss += loss.item()
 
             optimizer.zero_grad()
             loss.backward()

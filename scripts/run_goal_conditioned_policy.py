@@ -94,6 +94,7 @@ def simulate_policy(args):
 
     env.reset()
     env.reset()
+    env.decode_goals = False
 
     from rlkit.util.video import dump_video
     save_dir = osp.join(args.dir, 'visual.gif')

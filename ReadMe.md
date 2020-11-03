@@ -1,6 +1,6 @@
 # ROLL: Visual Self-Supervised Reinforcement Learning with Object Reasoning
 
-This is the official implementation for the paper "ROLL: Visual Self-Supervised Reinforcement Learning with Object Reasoning", to appear at Conference on Robot Learning (CoRL) 2020. [[Arxiv]()], [[Project Page](https://sites.google.com/andrew.cmu.edu/roll)] 
+This is the official implementation for the paper "ROLL: Visual Self-Supervised Reinforcement Learning with Object Reasoning", to appear at Conference on Robot Learning (CoRL) 2020. [[Arxiv]()], [[Project Page](https://sites.google.com/andrew.cmu.edu/roll)]  
 Authors: [Yufei Wang*](https://yufeiwang63.github.io/), Gautham Narayan*, [Xingyu Lin](https://xingyu-lin.github.io/), Brian Okorn, [David Held](https://davheld.github.io/) (* indicates equal contribution)
 
 
@@ -58,7 +58,7 @@ You can use `viskit data/local/exp-prefix-detailed-date}` to view the learning p
 All logs will be dumped at `data/local/{exp-prefix-detailed-date}`.  
 You can use `viskit data/local/exp-prefix-detailed-date}` to view the learning progress in a local port.
 
-9. Pre-trained models:  
+### Pre-trained models:  
 We provide a pre-trained model (which include a pre-trained scene-VAE, object-VAE/LSTM, and a pre-trained policy) of ROLL for each task. It should have been automatically downloaded when you download the data for pre-training the scene-VAE/object-VAE/LSTM in step 4.  
 The pre-trained models are at `data/local/pre-trained-models/{env-name}/params.pkl`, along with a gif visulization of its performance.  
 To create the gif by yourself, simply run   
@@ -67,10 +67,10 @@ A gif visual `visual.gif` should be soon dumped at the same directory as the par
 ![Gif](hurdle-bottom-visual.gif)   
 In the gif, the 1st row is the segmented goal image, the 2nd row is the image observation of the trained policy's execution, the 3rd row is the corresponding segmented object image, the 4th row is the scene-VAE reconstruction, and the 5th row is the object-VAE reconstruction.   
 
-10. Train ROLL with pre-trained scene-VAE, objcet-VAE and LSTM.  
+Train ROLL with pre-trained scene-VAE, objcet-VAE and LSTM:   
 The default behaviour of ROLL is to retrain the scene-VAE, object-VAE and LSTM from scratch. This could take a while to run, therefore, we prvodie the option of running ROLL with pre-trained VAE models. The pre-trained models are included at `data/local/pre-trained-models/{env-name}/params.pkl`. To use pre-trained models, simply change the `vae_path` variable under `skewfit_varaint` in the launch files. E.g, for Running ROLL on Puck-Pushing-Hurdle-Bottom with pre-trained VAEs/LSTM, the `vae_path` variable should be set to `data/local/pre-trained-models/puck-push-hurdle-bottom/` (see line 31 at `ROLL/launchers/launch_ROLL_sawyerhurdlemiddle.py`) 
 
-11. Change segmentation method:  
+### Change segmentation method:  
 Ideally, ROLL should work with any segmentation code that removes the static background and robot arm. As stated in the paper, in this work we mainly use openCV background subtraction and UNet to achieve these two tasks. Any other segmentation methods that do the same thing should work.  
 We have tried to write the code in a modular way so it would be easy to swap to other segmentation methods. If you want to change the segmentation method, there are a few lines of code that you will need to change:
 - You can implement your new segmentation method inside `segmentation/segment_image.py`. Say it is named `new_segment_func`.  
@@ -78,7 +78,7 @@ We have tried to write the code in a modular way so it would be easy to swap to 
 - You can comment the code segment from line 174 to line 202 in `skewfit_full_experiments_LSTM.py` -- that's the code for pretraining the openCV background subtraction. If your new segmentation method does not need it, you can comment it.  
 With this being said, we have not fully tested if the code would work perfectly with another segmentaion method. Feel free to open an issue or send an email to yufeiw2@andrew.cmu.edu to discuss if you encounter a bug/not sure how exactly to implement about this.
 
-12. Code file structures/descriptions  
+### Code file structures/descriptions  
 - ROLL/: include all code files for training object-VAE, LSTM, the policy.
     - launch_files/: the experiment launch file for each environment
     - generate_LSTM_vae_only_dataset.py: generate or load pre-generated image datasets for pre-training the object-VAE and LSTM

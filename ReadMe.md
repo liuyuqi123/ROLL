@@ -1,6 +1,6 @@
 # ROLL: Visual Self-Supervised Reinforcement Learning with Object Reasoning
 
-This is the official implementation for the paper "ROLL: Visual Self-Supervised Reinforcement Learning with Object Reasoning", to appear at Conference on Robot Learning (CoRL) 2020. [[Arxiv]()], [[Project Page](https://sites.google.com/andrew.cmu.edu/roll)] 
+This is the official implementation for the paper "ROLL: Visual Self-Supervised Reinforcement Learning with Object Reasoning", to appear at Conference on Robot Learning (CoRL) 2020. [[Arxiv]()], [[Project Page](https://sites.google.com/andrew.cmu.edu/roll)]  
 Authors: [Yufei Wang*](https://yufeiwang63.github.io/), Gautham Narayan*, [Xingyu Lin](https://xingyu-lin.github.io/), Brian Okorn, [David Held](https://davheld.github.io/) (* indicates equal contribution)
 
 

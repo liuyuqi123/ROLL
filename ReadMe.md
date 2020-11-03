@@ -6,12 +6,20 @@ Authors: [Yufei Wang*](https://yufeiwang63.github.io/), Gautham Narayan*, [Xingy
 
 ## Instructions
 1. Create conda environment  
-Create a conda environment by running `conda env create -f environment.yml`  
+```
+conda env create -f environment.yml
+```  
 
-2. Activate the conda environment by running `source prepare.sh`.  
+2. Activate the conda environment  
+```
+source prepare.sh
+```  
 
-3. Install our customized multiworld environments   
-`cd multiworld` and run `pip install .`  
+3. Install our customized multiworld environments     
+```
+cd multiworld
+pip install .
+```  
 (Note: this requires that you have Mujoco installed on your system)
 
 4. Download the data we collected for pre-training the scene-VAE, the object-VAE & LSTM.    
@@ -31,30 +39,37 @@ ROLL-release/segmentation/pytorchmodel_sawyer_push
 We also provide an example script for training a U-Net model from scratch on the hurdle-top environment.  
 Please refer to segmentation/ReadMe.md.
 
-6. Test the above steps: `python ROLL/launchers/launch_lstm_sawyerhurdle.py`  
-All the logs will be saved at `data/local/debug/{exp-prefix-detailed-date}`  
-Sepcifically, there will be:  
-- `variant.json` that stores all the hyper-parameters;   
-- `progress.csv` that stores all the logging information during training;  
-- `itr_{epoch}.pkl` and `params.pkl` that stores the trained policy, vae, environments, and all necessary data for reruning the policy after training;    
-- various debugging plots/gifs for analysis.     
+6. Test the above steps: 
+```
+python ROLL/launchers/launch_lstm_sawyerhurdle.py
+```  
 If the code runs correctly, two gifs that visualize the learning process should be created very soon.
 
+All the logs will be saved at `data/local/debug/{exp-prefix-detailed-date}`  
+Sepcifically, there will be:  
+    - `variant.json` that stores all the hyper-parameters;   
+    - `progress.csv` that stores all the logging information during training;  
+    - `itr_{epoch}.pkl` and `params.pkl` that stores the trained policy, vae, environments, and all necessary data for reruning the policy after training;    
+    - various debugging plots/gifs for analysis.     
+
 7. Running ROLL:   
-`python ROLL/launchers/launch_ROLL_sawyerpush.py --no-debug`  
-`python ROLL/launchers/launch_ROLL_sawyerhurdlemiddle.py --no-debug`  
-`python ROLL/launchers/launch_ROLL_sawyerhurdle.py --no-debug`  
-`python ROLL/launchers/launch_ROLL_sawyerdoor.py --no-debug`  
-`python ROLL/launchers/launch_ROLL_sawyerpickup.py --no-debug`  
-All logs will be dumped at `data/local/{exp-prefix-detailed-date}`.  
+```
+python ROLL/launchers/launch_ROLL_sawyerpush.py --no-debug # Puck Pushing
+python ROLL/launchers/launch_ROLL_sawyerhurdlemiddle.py --no-debug # Puck Pushing Hurdle-Bottom
+python ROLL/launchers/launch_ROLL_sawyerhurdle.py --no-debug # Puck Pushing Hurdle-Top
+python ROLL/launchers/launch_ROLL_sawyerdoor.py --no-debug # Door Opening
+python ROLL/launchers/launch_ROLL_sawyerpickup.py --no-debug # Object Pickup
+```
+All logs will be dumped at `data/local/{exp-prefix-detailed-date}`  
 You can use `viskit data/local/exp-prefix-detailed-date}` to view the learning progress in a local port.
 
 8. Running Skewfit:  
-`python examples/skewfit/launch_skewfit_sawyer_push.py --no-debug`  
-`python examples/skewfit/launch_skewfit_sawyer_push_hurdle_middle.py --no-debug`  
-`python examples/skewfit/launch_skewfit_sawyer_push_hurdle.py --no-debug`  
-`python examples/skewfit/launch_skewfit_sawyer_door.py --no-debug`  
-`python examples/skewfit/launch_sawyer_pickup.py --no-debug`  
+```
+python examples/skewfit/launch_skewfit_sawyer_push.py --no-debug # Puck Pushing
+python examples/skewfit/launch_skewfit_sawyer_push_hurdle.py --no-debug # Puck Pushing Hurdle-{Top, Bottom}
+python examples/skewfit/launch_skewfit_sawyer_door.py --no-debug # Door Opening
+python examples/skewfit/launch_sawyer_pickup.py --no-debug # Object Pickup
+```
 All logs will be dumped at `data/local/{exp-prefix-detailed-date}`.  
 You can use `viskit data/local/exp-prefix-detailed-date}` to view the learning progress in a local port.
 
@@ -62,13 +77,21 @@ You can use `viskit data/local/exp-prefix-detailed-date}` to view the learning p
 We provide a pre-trained model (which include a pre-trained scene-VAE, object-VAE/LSTM, and a pre-trained policy) of ROLL for each task. It should have been automatically downloaded when you download the data for pre-training the scene-VAE/object-VAE/LSTM in step 4.  
 The pre-trained models are at `data/local/pre-trained-models/{env-name}/params.pkl`, along with a gif visulization of its performance.  
 To create the gif by yourself, simply run   
-`python scripts/run_goal_conditioned_policy.py --dir {dir-to-env-params.pkl} --gpu`.   
+```
+python scripts/run_goal_conditioned_policy.py --dir {dir-to-env-params.pkl} --gpu
+```   
 A gif visual `visual.gif` should be soon dumped at the same directory as the params.pkl file. E.g. a visual for the trained model on hurdle-bottom push env is as below:  
 ![Gif](hurdle-bottom-visual.gif)   
-In the gif, the 1st row is the segmented goal image, the 2nd row is the image observation of the trained policy's execution, the 3rd row is the corresponding segmented object image, the 4th row is the scene-VAE reconstruction, and the 5th row is the object-VAE reconstruction.   
+In the gif  
+- The 1st row is the segmented goal image  
+- The 2nd row is the image observation of the trained policy's execution  
+- The 3rd row is the corresponding segmented object image  
+- The 4th row is the scene-VAE reconstruction  
+- The 5th row is the object-VAE reconstruction.   
 
 #### Train ROLL with pre-trained scene-VAE, objcet-VAE and LSTM:   
-The default behaviour of ROLL is to retrain the scene-VAE, object-VAE and LSTM from scratch. This could take a while to run, therefore, we prvodie the option of running ROLL with pre-trained VAE models. The pre-trained models are included at `data/local/pre-trained-models/{env-name}/params.pkl`. To use pre-trained models, simply change the `vae_path` variable under `skewfit_varaint` in the launch files. E.g, for Running ROLL on Puck-Pushing-Hurdle-Bottom with pre-trained VAEs/LSTM, the `vae_path` variable should be set to `data/local/pre-trained-models/puck-push-hurdle-bottom/` (see line 31 at `ROLL/launchers/launch_ROLL_sawyerhurdlemiddle.py`) 
+The default behaviour of ROLL is to retrain the scene-VAE, object-VAE and LSTM from scratch. This could take a while to run, therefore, we prvodie the option of running ROLL with pre-trained VAE models. The pre-trained models are included at `data/local/pre-trained-models/{env-name}/params.pkl`.   
+To use pre-trained models, simply change the `vae_path` variable under `skewfit_varaint` in the launch files. E.g, for Running ROLL on Puck-Pushing-Hurdle-Bottom with pre-trained VAEs/LSTM, the `vae_path` variable should be set to `data/local/pre-trained-models/puck-push-hurdle-bottom/` (see line 31 at `ROLL/launchers/launch_ROLL_sawyerhurdlemiddle.py`) 
 
 ## Change segmentation method:  
 Ideally, ROLL should work with any segmentation code that removes the static background and robot arm. As stated in the paper, in this work we mainly use openCV background subtraction and UNet to achieve these two tasks. Any other segmentation methods that do the same thing should work.  

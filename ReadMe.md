@@ -58,7 +58,7 @@ You can use `viskit data/local/exp-prefix-detailed-date}` to view the learning p
 All logs will be dumped at `data/local/{exp-prefix-detailed-date}`.  
 You can use `viskit data/local/exp-prefix-detailed-date}` to view the learning progress in a local port.
 
-### Pre-trained models:  
+## Pre-trained models:  
 We provide a pre-trained model (which include a pre-trained scene-VAE, object-VAE/LSTM, and a pre-trained policy) of ROLL for each task. It should have been automatically downloaded when you download the data for pre-training the scene-VAE/object-VAE/LSTM in step 4.  
 The pre-trained models are at `data/local/pre-trained-models/{env-name}/params.pkl`, along with a gif visulization of its performance.  
 To create the gif by yourself, simply run   
@@ -67,10 +67,10 @@ A gif visual `visual.gif` should be soon dumped at the same directory as the par
 ![Gif](hurdle-bottom-visual.gif)   
 In the gif, the 1st row is the segmented goal image, the 2nd row is the image observation of the trained policy's execution, the 3rd row is the corresponding segmented object image, the 4th row is the scene-VAE reconstruction, and the 5th row is the object-VAE reconstruction.   
 
-##### Train ROLL with pre-trained scene-VAE, objcet-VAE and LSTM:   
+#### Train ROLL with pre-trained scene-VAE, objcet-VAE and LSTM:   
 The default behaviour of ROLL is to retrain the scene-VAE, object-VAE and LSTM from scratch. This could take a while to run, therefore, we prvodie the option of running ROLL with pre-trained VAE models. The pre-trained models are included at `data/local/pre-trained-models/{env-name}/params.pkl`. To use pre-trained models, simply change the `vae_path` variable under `skewfit_varaint` in the launch files. E.g, for Running ROLL on Puck-Pushing-Hurdle-Bottom with pre-trained VAEs/LSTM, the `vae_path` variable should be set to `data/local/pre-trained-models/puck-push-hurdle-bottom/` (see line 31 at `ROLL/launchers/launch_ROLL_sawyerhurdlemiddle.py`) 
 
-### Change segmentation method:  
+## Change segmentation method:  
 Ideally, ROLL should work with any segmentation code that removes the static background and robot arm. As stated in the paper, in this work we mainly use openCV background subtraction and UNet to achieve these two tasks. Any other segmentation methods that do the same thing should work.  
 We have tried to write the code in a modular way so it would be easy to swap to other segmentation methods. If you want to change the segmentation method, there are a few lines of code that you will need to change:
 - You can implement your new segmentation method inside `segmentation/segment_image.py`. Say it is named `new_segment_func`.  

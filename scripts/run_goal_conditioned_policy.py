@@ -96,7 +96,7 @@ def simulate_policy(args):
     env.reset()
 
     from rlkit.util.video import dump_video
-    save_dir = osp.join(args.dir, 'visual-tmp.gif')
+    save_dir = osp.join(args.dir, 'visual.gif')
     dump_video(
         env, policy, save_dir, rollout, horizon=args.H, imsize=imsize, rows=1, columns=8, fps=30,
     )

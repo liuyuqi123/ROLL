@@ -45,7 +45,7 @@ Please refer to segmentation/ReadMe.md.
 
 6. Test the above steps: 
 ```
-python ROLL/launchers/launch_lstm_sawyerhurdle.py
+python ROLL/launcher_files/launch_ROLL_sawyerhurdle.py
 ```  
 If the code runs correctly, two gifs that visualize the learning process should be created very soon.
 
@@ -58,11 +58,11 @@ Sepcifically, there will be:
 
 7. Running ROLL:   
 ```
-python ROLL/launchers/launch_ROLL_sawyerpush.py --no-debug # Puck Pushing
-python ROLL/launchers/launch_ROLL_sawyerhurdlemiddle.py --no-debug # Puck Pushing Hurdle-Bottom
-python ROLL/launchers/launch_ROLL_sawyerhurdle.py --no-debug # Puck Pushing Hurdle-Top
-python ROLL/launchers/launch_ROLL_sawyerdoor.py --no-debug # Door Opening
-python ROLL/launchers/launch_ROLL_sawyerpickup.py --no-debug # Object Pickup
+python ROLL/launcher_files/launch_ROLL_sawyerpush.py --no-debug # Puck Pushing
+python ROLL/launcher_files/launch_ROLL_sawyerhurdlemiddle.py --no-debug # Puck Pushing Hurdle-Bottom
+python ROLL/launcher_files/launch_ROLL_sawyerhurdle.py --no-debug # Puck Pushing Hurdle-Top
+python ROLL/launcher_files/launch_ROLL_sawyerdoor.py --no-debug # Door Opening
+python ROLL/launcher_files/launch_ROLL_sawyerpickup.py --no-debug # Object Pickup
 ```
 All logs will be dumped at `data/local/{exp-prefix-detailed-date}`  
 You can use `viskit data/local/exp-prefix-detailed-date}` to view the learning progress in a local port.

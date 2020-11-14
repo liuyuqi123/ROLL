@@ -110,7 +110,7 @@ With this being said, we have not fully tested if the code would work perfectly 
 ## Cite
 If you find this codebase useful in your research, please consider citing:
 ```
-@inproceedings{corl2020softgym,
+@inproceedings{corl2020roll,
  title={ROLL: Visual Self-Supervised Reinforcement Learning with Object Reasoning},
  author={Wang, Yufei and Narayan, Gautham and Lin, Xingyu and Okorn, Brian and Held, David},
  booktitle={Conference on Robot Learning},
